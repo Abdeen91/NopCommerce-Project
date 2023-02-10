@@ -12,6 +12,7 @@ stages:
    jobs :
    - job :  MyJob
      strategy :
+         maxParallel : 1
          matrix:
               JOB1:
                   Version: 1.0
