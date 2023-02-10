@@ -41,8 +41,9 @@ jobs:
 - job: ActivityonWindows
   steps:
    - task: PowerShell@2
+     condition: succeeded() 
      inputs:
-       targetType: 'inline'
+       targetType: 'inline'  
        script: |
         $myTeamsWebHook = “https://woshub.webhook.office.com/webhookb2/123456-12312-@aaaaa-bbbb-cccc/IncomingWebhook/xxxxxxxxxxxxxxxxxxxxx/xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxxxxxxxxxx/xxxxx-xxxx-xxxx-xxxx”
         Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Test Teams!"}' -Uri $myTeamsWebHook  
