@@ -28,11 +28,11 @@ pool:
 name: sampleWeb_$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
 - main
-resources:
-  webhooks:
-  - webhook: MVAUK
-    connection: Incoming Webhook
-    type: Incoming Webhook
+#resources:
+  #webhooks:
+  #- webhook: MVAUK
+  #  connection: Incoming Webhook
+  #  type: Incoming Webhook
   
 jobs:
 - job: ActivityonWindows
