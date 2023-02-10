@@ -30,8 +30,7 @@ jobs:
   pool:
    name: default
   steps:
-  - script: echo Hello, world!
-    displayName: 'Run a one-line script'
+   
 - job: ActivityonWindows
   pool:
    name: Default
