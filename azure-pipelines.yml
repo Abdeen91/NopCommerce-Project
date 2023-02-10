@@ -7,7 +7,7 @@
 #pool:
 #  vmImage: ubuntu-latest
 pool:
-  name: default
+  name: Abdeen
 
 #stages:
 # - stage : Mystage
