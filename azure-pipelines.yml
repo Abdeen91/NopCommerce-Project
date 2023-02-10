@@ -23,8 +23,8 @@ stages:
               JOB3:
                   Version: 3.0
                   AppName: foobar
-         steps:
-           - script:
-                  echo "($Version)"
-                  echo "($AppName)"
-             displayName : "Echo Variables"
+     steps:
+      - script:
+          echo "($Version)"
+          echo "($AppName)"
+        displayName : "Echo Variables"
