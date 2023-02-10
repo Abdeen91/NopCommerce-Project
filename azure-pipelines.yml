@@ -28,11 +28,14 @@ pool:
 name: sampleWeb_$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
 - main
-#resources:
-  #webhooks:
-  #- webhook: MVAUK
-  #  connection: Incoming Webhook
-  #  type: Incoming Webhook
+resources:
+  webhooks:
+  - webhook: MVAUK
+    connection: Incoming Webhook
+    type: Incoming Webhook
+variables: 
+- name: webhookURL
+  value: 
   
 jobs:
 - job: ActivityonWindows
@@ -41,22 +44,23 @@ jobs:
      inputs:
        targetType: 'inline'
        script: |
-         # Write your PowerShell commands here.
-         
-         Write-Host "Hello World"       
-         success{
-           office365ConnectorSend (
-            status: "Pipeline Status",
-            webhookUrl: "https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f",
-            color: '00ff00',
-            message: "Test Successful: ${JOB_NAME}"
-            )}
-         failure{
-           office365ConnectorSend (
-            status: "Pipeline Status",
-            webhookUrl: "https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f",
-            color: '00ff00',
-            message: "Test fail: ${JOB_NAME}"
-            )}
-       
+        $myTeamsWebHook = “https://woshub.webhook.office.com/webhookb2/123456-12312-@aaaaa-bbbb-cccc/IncomingWebhook/xxxxxxxxxxxxxxxxxxxxx/xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxxxxxxxxxx/xxxxx-xxxx-xxxx-xxxx”
+        Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Test Teams!"}' -Uri $myTeamsWebHook  
+   - script: 
+     condition: succeeded()    
+ #       success{
+ #          office365ConnectorSend (
+ #           status: "Pipeline Status",
+ #           webhookUrl: "https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f",
+ #           color: '00ff00',
+ #           message: "Test Successful: ${JOB_NAME}"
+ #           )}
+ #        failure{
+ #          office365ConnectorSend (
+ #           status: "Pipeline Status",
+ #           webhookUrl: "https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f",
+ #           color: '00ff00',
+ #           message: "Test fail: ${JOB_NAME}"
+ #           )}
+
 
