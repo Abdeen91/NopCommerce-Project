@@ -45,7 +45,7 @@ jobs:
      inputs:
        targetType: 'inline'  
        script: |
-        
+        Write-Host "Hello World"
         - uses: actions/checkout@v2
         - name: Notify dedicated teams channel
         - uses: jdcargile/ms-teams-notification@v1.3
