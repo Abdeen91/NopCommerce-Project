@@ -4,8 +4,8 @@
 # https://aka.ms/yaml
 
 
-#pool:
-#  vmImage: ubuntu-latest
+pool:
+  vmImage: ubuntu-latest
 
 #stages:
 # - stage : Mystage
@@ -27,8 +27,6 @@ trigger:
 - main
 jobs:
 - job: ActivityonLinux
-  pool:
-   name: Azure Pipelines
   steps:
    - task: PowerShell@2
      inputs:
@@ -38,8 +36,6 @@ jobs:
          
          Write-Host "Hello World"
 - job: ActivityonWindows
-  pool:
-   name: Azure Pipelines
   steps:
    - task: CmdLine@2
      inputs:
