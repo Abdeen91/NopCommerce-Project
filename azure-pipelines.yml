@@ -28,10 +28,15 @@ pool:
 name: sampleWeb_$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
 - main
+resources:
+  webhooks:
+  - webhook: MVAUK
+    connection: Incoming Webhook
+    type: Incoming Webhook
+  
 jobs:
 - job: ActivityonWindows
   steps:
-      
    - task: PowerShell@2
      inputs:
        targetType: 'inline'
@@ -53,14 +58,5 @@ jobs:
             color: '00ff00',
             message: "Test fail: ${JOB_NAME}"
             )}
+       
 
-          
-post {
-    success { 
-            office365ConnectorSend message:"Test",
-                status:"success",
-                color:"f00000",
-                webhookUrl:'https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f'
-        } //failure        
-         
- 
