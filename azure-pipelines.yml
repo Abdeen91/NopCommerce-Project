@@ -4,21 +4,42 @@
 # https://aka.ms/yaml
 
 
-pool:
-  vmImage: ubuntu-latest
+#pool:
+#  vmImage: ubuntu-latest
 
-stages:
- - stage : Mystage
-   jobs :
-   - job :  MyJob
-     strategy :
-         maxParallel : 1
-         matrix:
-              JOB1:
-                  Version: 1.0
-                  AppName: foo
-     steps:
-      - script:
-          echo "($Version)"
-          echo "($AppName)"
-        displayName : "Echo Variables"
+#stages:
+# - stage : Mystage
+#   jobs :
+#   - job :  MyJob
+#     strategy :
+#         maxParallel : 1
+#         matrix:
+#              JOB1:
+#                  Version: 1.0
+#                  AppName: foo
+#     steps:
+#      - script:
+#          echo "($Version)"
+#          echo "($AppName)"
+#        displayName : "Echo Variables"
+
+trigger:
+- main
+jobs:
+- job: ActivityonLinux
+  pool:
+   name: default
+  steps:
+  - script: echo Hello, world!
+    displayName: 'Run a one-line script'
+- job: ActivityonWindows
+  pool:
+   name: Default
+  steps:
+   - task: PowerShell@2
+     inputs:
+       targetType: 'inline'
+       script: |
+         # Write your PowerShell commands here.
+         
+         Write-Host "Hello World"
