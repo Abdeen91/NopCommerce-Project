@@ -23,10 +23,19 @@
 #          echo "($AppName)"
 #        displayName : "Echo Variables"
 
+name: sampleWeb_$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
 - main
 jobs:
 - job: ActivityonLinux
+  pool:
+   name: default
+  steps:
+  - script: echo Hello, world!
+    displayName: 'Run a one-line script'
+- job: ActivityonWindows
+  pool:
+   name: default
   steps:
    - task: PowerShell@2
      inputs:
@@ -35,11 +44,4 @@ jobs:
          # Write your PowerShell commands here.
          
          Write-Host "Hello World"
-- job: ActivityonWindows
-  steps:
-   - task: CmdLine@2
-     inputs:
-       script: |
-         echo Write your commands here
-         
-         echo Hello world
+
