@@ -28,14 +28,10 @@ trigger:
 - main
 jobs:
 - job: ActivityonLinux
-  pool:
-   name: default
   steps:
   - script: echo Hello, world!
     displayName: 'Run a one-line script'
 - job: ActivityonWindows
-  pool:
-   name: default
   steps:
    - task: PowerShell@2
      inputs:
