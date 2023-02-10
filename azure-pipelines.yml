@@ -28,7 +28,7 @@ trigger:
 jobs:
 - job: ActivityonLinux
   pool:
-   name: default
+   name: Azure Pipelines
   steps:
    - task: PowerShell@2
      inputs:
@@ -39,7 +39,7 @@ jobs:
          Write-Host "Hello World"
 - job: ActivityonWindows
   pool:
-   name: Default
+   name: Azure Pipelines
   steps:
    - task: CmdLine@2
      inputs:
