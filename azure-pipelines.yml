@@ -54,7 +54,7 @@ jobs:
             ms-teams-webhook-uri: https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f
             notification-summary: Your custom notification message 
             notification-color: 17a2b8
-            timezone: America/Denver
+           # timezone: America/Denver
   
 
  #       success{
