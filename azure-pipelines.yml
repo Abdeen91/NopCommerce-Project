@@ -50,7 +50,7 @@ stages:
     jobs:
     - job: MyJob2
       steps:
-      - ${{ each value in A1.job}}:
+      - ${{ each value in(dependencies.A1.job}}:
       - script: echo ${{ value }}
       - ${{ if eq(job.status, 'Successded') }}:
         - script: echo 'success'
