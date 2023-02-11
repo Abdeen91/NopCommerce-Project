@@ -33,40 +33,33 @@ trigger:
 #  - webhook: MVAUK
 #    connection: Incoming Webhook
 #    type: Incoming Webhook
-variables: 
-- name: webhookURL
-  value: Abdeen
-  
-jobs:
-- job: ActivityonWindows
-  steps:
-    success:
-      name: One with everything
-    #  runs-on: ubuntu-18.04
-      steps:
-        - uses: actions/checkout@master
-        - name: Microsoft Teams Notification
-          uses: skitionek/notify-microsoft-teams@master
-          if: always()
-          with:
-            webhook_url: https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f
-            needs: ${{ toJson(needs) }}
-            job: ${{ toJson(job) }}
-            steps: ${{ toJson(steps) }}
-            dry_run: True
+#variables: 
+#- name: webhookURL
+#  value: Abdeen
 
-    if_failure:
-      name: Only if failure
-      runs-on: ubuntu-18.04
+stages:
+  - stage: A1
+    jobs:
+    - job: MyJob1
       steps:
-        - uses: actions/checkout@master
-        - name: Microsoft Teams Notification
-          uses: skitionek/notify-microsoft-teams@master
-          if: failure()
-          with:
-            webhook_url: https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f
+      - script: 
+         echo  Hello world
 
-  
+  - stage: A2
+    dependsOn: A1
+    jobs:
+    - job: MyJob2
+      steps:
+      - ${{ each value in A1.job}}:
+      - script: echo ${{ value }}
+      - ${{ if eq(job.status, 'Successded') }}:
+        - script: echo 'success'
+      - ${{ else }}: 
+        - script: echo "failed"   
+
+   
+
+
 
  #       success{
  #          office365ConnectorSend (
