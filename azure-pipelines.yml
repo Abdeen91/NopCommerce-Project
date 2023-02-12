@@ -59,9 +59,16 @@ stages:
         value : stageDependencies.A1.MyJob2.result        
     dependsOn: A1
     jobs:
-    - job: MyJob2
+    - job: MyJob3
       #condition: in(stageDependencies.A1.MyJob1.result, 'Succeeded') 
-      steps:        
+      steps:
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: |
+               $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
+              
+               Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Test Teams!"}' -Uri $myTeamsWebHook
         - ${{ each value in variables.value }}:
            - script: echo ${{ value }}
            - task: CmdLine@2
