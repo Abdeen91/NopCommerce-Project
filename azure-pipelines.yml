@@ -36,24 +36,35 @@ trigger:
 #variables: 
 #- name: webhookURL
 #  value: Abdeen
+parameters:
+  - name : envrionment
+    type: object
+    default:
+      - MyJob1
+      - MyJob2
 
 stages:
   - stage: A1
     jobs:
     - job: MyJob1
-      displayName: Abdeen
+      displayName: Abdeen1
       steps:
       - script: 
          echo  Hello world
+    - job: MyJob2
+      displayName: Abdeen2
+      steps:
+      - script: 
+         echo  Hello world 2    
 
   - stage: A2
     dependsOn: A1
     jobs:
     - job: MyJob2
       steps:
-      - ${{ each value in(dependencies.A1.displayName}}:
+      - ${{ each value in stageDependencies.A1.${{parameters.environment}}.result}}:
       - script: echo ${{ value }}
-      - ${{ if eq(job.status, 'Successded') }}:
+      - ${{ if eq(stageDependencies.A1.${{parameters.environment}}.result, 'Successded') }}:
         - script: echo 'success'
       - ${{ else }}: 
         - script: echo "failed"   
