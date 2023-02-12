@@ -21,7 +21,8 @@ stages:
                  AppName: foo
              JOB2:
                  Version: 2.0
-                 AppName: bar                 
+                 AppName: bar   
+    condition: or (succeeded(JOB1), failed(JOB2) )              
     steps:
      - script:
          echo "($Version)"
