@@ -26,7 +26,7 @@ stages:
     condition: succeeded()              
     steps:
      - script:
-         echo ${{ job.status }}
+         echo "($Status)"
          echo "($Version)"
          echo "($AppName)"
        displayName : "Echo Variables"
