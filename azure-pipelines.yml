@@ -38,12 +38,18 @@ trigger:
 #  value: Abdeen
 parameters:
   - name : envrionments
+    type: object
     default:
       - stageDependencies.A1.MyJob1.result
       - stageDependencies.A1.MyJob2.result
 
 stages:
   - stage: A1
+    variables:
+      - name: MyJob1
+        value : $[ stageDependencies.A1.MyJob1.result ]
+      - name: MyJob2
+        value : $[ stageDependencies.A1.MyJob2.result ]
     jobs:
     - job: MyJob1
       displayName: Abdeen1
@@ -62,7 +68,7 @@ stages:
     - job: MyJob2
       #condition: in(stageDependencies.A1.MyJob1.result, 'Succeeded') 
       steps:        
-        - ${{ each value in parameters.environments }}:
+        - ${{ each value in variables.value }}:
            - script: echo ${{ value }}
         - ${{ if eq(value, 'Successded') }}:
            - script: echo Abdeen succeeded
