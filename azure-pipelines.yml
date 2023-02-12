@@ -70,7 +70,7 @@ stages:
     jobs:
     - job: MyJob3
       - ${{ each value in parameters.listOfStrings }}:
-        condition: in(${{ value }}, 'Succeeded') 
+      condition: in(${{ value }}, 'Succeeded') 
       steps:
        # - task: PowerShell@2
        #   inputs:
