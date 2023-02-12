@@ -70,7 +70,7 @@ stages:
       steps:        
         - ${{ each value in variables.value }}:
            - script: echo ${{ value }}
-        - ${{ if eq(${{value}}, 'Successded') }}:
+        - ${{ if eq(${{ value }}, 'Successded') }}:
            - script: echo Abdeen succeeded
         - ${{ else }}: 
            - script: echo Abdeen failed   
