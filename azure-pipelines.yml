@@ -25,7 +25,7 @@ stages:
                  
     condition: succeeded()              
     steps:
-     - script:
+     - script: |
          echo "($Status)"
          echo "($Version)"
          echo "($AppName)"
