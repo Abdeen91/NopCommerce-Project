@@ -29,7 +29,9 @@ stages:
                  AppName: bar  
 
     variables:
-      Environment : $(Version)          
+      - name: Environment
+        value: $(Version)
+
 
     steps: 
       - ${{ if eq( variables.Environment, 'int1' ) }}:  
