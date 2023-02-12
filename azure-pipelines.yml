@@ -36,7 +36,8 @@ stages:
        condition: succeeded()
      - ${{ if eq('Version', 'int1') }}:
         - script: |
-              Write-Host "##vso[task.setvariable variable=int1Status;]Int1 Test Teams is up"
+              echo "##vso[task.setvariable variable=int1Status;]Int1 Test Teams is up"
+              echo "$(int1Status)"
      - ${{ elseif eq(variables['Version'], 'qcx') }}:
         - script: |
               Write-Host "##vso[task.setvariable variable=qcxStatus;]qcx Test Teams is up"              
