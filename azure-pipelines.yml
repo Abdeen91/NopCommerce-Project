@@ -39,10 +39,10 @@ variables:
 
 parameters:
 - name: listOfStrings
-  default: true
-  values:
-    - stageDependencies.A1.MyJob1.result
-    - stageDependencies.A1.MyJob2.result
+  type: object
+  default:
+  - stageDependencies.A1.MyJob1.result
+  - stageDependencies.A1.MyJob2.result
 
 stages:
   - stage: A1
