@@ -68,7 +68,7 @@ stages:
              inputs:
                script: |
                  echo ${{ value }}
-           - ${{ if eq(value , 'Successded') }}:
+           - ${{ if eq(value , 'Succeeded') }}:
              - script: echo Abdeen succeeded
            - ${{ else }}: 
              - script: echo Abdeen failed 
