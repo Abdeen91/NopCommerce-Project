@@ -40,8 +40,8 @@ parameters:
   - name : envrionments
     type: object
     default:
-      - MyJob1
-      - MyJob2
+      - stageDependencies.A1.MyJob1.result
+      - stageDependencies.A1.MyJob2.result
 
 stages:
   - stage: A1
@@ -61,18 +61,14 @@ stages:
     dependsOn: A1
     jobs:
     - job: MyJob2
-      condition: in(stageDependencies.A1.MyJob1.result, 'Succeeded') 
+      #condition: in(stageDependencies.A1.MyJob1.result, 'Succeeded') 
       steps:
-       - task: CmdLine@2
-         inputs:
-           script: |
-             echo Int 1 success
-          
-      #- ${{ each value in parameters.environments }}:
-      #- script: echo ${{ value }}
-      #- ${{ if eq(stageDependencies.A1.value.result, 'Successded') }}:
-      #- ${{ else }}: 
-      #  - script: echo "failed"   
+        - ${{ each value in parameters.environments }}:
+           - script: echo ${{ value }}
+        - ${{ if eq(stageDependencies.A1.value.result, 'Successded') }}:
+           - script: echo Abdeen succeeded
+        - ${{ else }}: 
+           - script: echo Abdeen failed   
 
  #       success{
  #          office365ConnectorSend (
