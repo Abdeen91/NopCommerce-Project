@@ -61,7 +61,7 @@ stages:
     dependsOn: A1
     jobs:
     - job: MyJob2
-      condition: in(stageDependencies.A.A1.result, 'Succeeded') 
+      condition: in(stageDependencies.A1.MyJob1.result, 'Succeeded') 
       steps:
        - task: CmdLine@2
          inputs:
