@@ -63,16 +63,16 @@ stages:
     - job: MyJob2
       condition: in(stageDependencies.A.A1.result, 'Succeeded') 
       steps:
+       - task:
+         inputs:
+           script: |
+             echo Int 1 success
+          
       #- ${{ each value in parameters.environments }}:
       #- script: echo ${{ value }}
       #- ${{ if eq(stageDependencies.A1.value.result, 'Successded') }}:
-        - script: echo 'success'
       #- ${{ else }}: 
       #  - script: echo "failed"   
-
-   
-
-
 
  #       success{
  #          office365ConnectorSend (
