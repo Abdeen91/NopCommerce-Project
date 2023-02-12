@@ -33,23 +33,17 @@ trigger:
 #  - webhook: MVAUK
 #    connection: Incoming Webhook
 #    type: Incoming Webhook
-#variables: 
-#- name: webhookURL
-#  value: Abdeen
-parameters:
-  - name : envrionments
-    type: object
-    default:
-      - stageDependencies.A1.MyJob1.result
-      - stageDependencies.A1.MyJob2.result
+variables: 
+  - name: webhookURL
+    value: Abdeen
 
 stages:
   - stage: A1
     variables:
       - name: MyJob1
-        value : $[ stageDependencies.A1.MyJob1.result ]
+        value : ${{ stageDependencies.A1.MyJob1.result }}
       - name: MyJob2
-        value : $[ stageDependencies.A1.MyJob2.result ]
+        value : ${{ stageDependencies.A1.MyJob2.result }}
     jobs:
     - job: MyJob1
       displayName: Abdeen1
