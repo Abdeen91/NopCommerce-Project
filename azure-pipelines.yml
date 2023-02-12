@@ -27,7 +27,7 @@ stages:
                  AppName: bar   
                                
     steps:
-    - ${{ if eq('Version', 'int1') }}:     
+    - ${{ if eq('$(Version)', 'int1') }}:     
       - task: PowerShell@2
         inputs:
          targetType: 'inline'
