@@ -9,87 +9,90 @@
 pool:
   name: Abdeen
 
-#stages:
-# - stage : Mystage
-#   jobs :
-#   - job :  MyJob
-#     strategy :
-#         maxParallel : 1
-#         matrix:
-#              JOB1:
-#                  Version: 1.0
-#                  AppName: foo
-#     steps:
-#      - script:
-#          echo "($Version)"
-#          echo "($AppName)"
-#        displayName : "Echo Variables"
+stages:
+- stage : Mystage
+  jobs :
+  - job :  MyJob
+    strategy :
+        maxParallel : 1
+        matrix:
+             JOB1:
+                 Version: 1.0
+                 AppName: foo
+             JOB2:
+                 Version: 2.0
+                 AppName: bar                 
+    steps:
+     - script:
+         echo "($Version)"
+         echo "($AppName)"
+       displayName : "Echo Variables"
 
-name: sampleWeb_$(Date:yyyyMMdd)$(Rev:.r)
-trigger:
-- main
+#name: sampleWeb_$(Date:yyyyMMdd)$(Rev:.r)
+#trigger:
+#- main
 #resources:
 #  webhooks:
 #  - webhook: MVAUK
 #    connection: Incoming Webhook
 #    type: Incoming Webhook
-variables: 
-  - name: webhookURL
-    value: Abdeen
+#variables: 
+#  - name: webhookURL
+#    value: Abdeen
 
-parameters:
-- name: listOfStrings
-  type: object
-  default:
-  - stageDependencies.A1.MyJob1.result
-  - stageDependencies.A1.MyJob2.result
+# parameters:
+# - name: listOfStrings
+#   type: object
+#   default:
+#   - stageDependencies.A1.MyJob1.result
+#   - stageDependencies.A1.MyJob2.result
 
-stages:
-  - stage: A1
-    jobs:
-    - job: MyJob1
-      displayName: Abdeen1
-      steps:
-      - script: 
-         echo  Hello world
-    - job: MyJob2
-      displayName: Abdeen2
-      steps:
-      - script: 
-         echo  Hello world 2    
+# stages:
+#   - stage: A1
+#     jobs:
+#     - job: MyJob1
+#       displayName: Abdeen1
+#       steps:
+#       - script: 
+#          echo  Hello world
+#     - job: MyJob2
+#       displayName: Abdeen2
+#       steps:
+#       - script: 
+#          echo  Hello world 2    
 
 
 
-  - stage: A2
-    variables:
-      - name: MyJob1
-        value : stageDependencies.A1.MyJob1.result
-      - name: MyJob2
-        value : stageDependencies.A1.MyJob2.result  
-    dependsOn: A1              
-    jobs:
-    - job: MyJob3
-      condition: eq(stageDependencies.A1.MyJob1.result, 'Failed') 
-      steps:
-       # - task: PowerShell@2
-       #   inputs:
-       #     targetType: 'inline'
-       #     script: |
-       #        $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
-       #       
-       #        Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Test Teams!"}' -Uri $myTeamsWebHook
-   #     - ${{ each value in parameters.listOfStrings }}:
-   #        - script: echo ${{ value }}
-   #        # variables['${{ value }}']
-   #        - ${{ if eq(dependencies.A1.MyJob1.result , 'Succeeded') }}:
-             - task: PowerShell@2
-               inputs:
-                 targetType: 'inline'
-                 script: |
-                   $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
-                   Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Test Teams!"}' -Uri $myTeamsWebHook
-    #       - ${{ else }}: 
-    #         - script: echo Abdeen failed 
+  # - stage: A2
+  #   variables:
+  #     - name: MyJob1
+  #       value : stageDependencies.A1.MyJob1.result
+  #     - name: MyJob2
+  #       value : stageDependencies.A1.MyJob2.result  
+  #   dependsOn: A1              
+  #   jobs:
+  #   - job: MyJob3
+  #     condition: eq(stageDependencies.A1.MyJob1.result, 'Failed') 
+  #     steps:
+  #      # - task: PowerShell@2
+  #      #   inputs:
+  #      #     targetType: 'inline'
+  #      #     script: |
+  #      #        $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
+  #      #       
+  #      #        Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Test Teams!"}' -Uri $myTeamsWebHook
+  #  #     - ${{ each value in parameters.listOfStrings }}:
+  #  #        - script: echo ${{ value }}
+  #  #        # variables['${{ value }}']
+  #  #        - ${{ if eq(dependencies.A1.MyJob1.result , 'Succeeded') }}:
+  #            - task: PowerShell@2
+  #              inputs:
+  #                targetType: 'inline'
+  #                script: |
+  #                  $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
+  #                  Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Test Teams!"}' -Uri $myTeamsWebHook
+  #   #       - ${{ else }}: 
+  #   #         - script: echo Abdeen failed 
 
 
  #       success{
