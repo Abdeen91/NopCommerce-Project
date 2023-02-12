@@ -65,7 +65,7 @@ stages:
       steps:
         - ${{ each value in parameters.environments }}:
            - script: echo ${{ value }}
-        - ${{ if eq(stageDependencies.A1.value.result, 'Successded') }}:
+        - ${{ if eq(value, 'Successded') }}:
            - script: echo Abdeen succeeded
         - ${{ else }}: 
            - script: echo Abdeen failed   
