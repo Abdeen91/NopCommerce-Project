@@ -63,7 +63,7 @@ stages:
     - job: MyJob2
       condition: in(stageDependencies.A.A1.result, 'Succeeded') 
       steps:
-       - task:
+       - task: CmdLine@2
          inputs:
            script: |
              echo Int 1 success
