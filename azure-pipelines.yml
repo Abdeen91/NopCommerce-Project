@@ -22,7 +22,7 @@ stages:
              JOB2:
                  Version: 2.0
                  AppName: bar   
-    condition: or(succeeded('JOB1'), failed('JOB2') )              
+    condition: or(succeeded('MyJob JOB1'), failed('MyJob JOB2') )              
     steps:
      - script:
          echo "($Version)"
