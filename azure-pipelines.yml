@@ -59,7 +59,6 @@ stages:
 
   - stage: A2
     dependsOn: A1
-    variables:
     jobs:
     - job: MyJob2
       condition: in(stageDependencies.A.A1.result, 'Succeeded') 
