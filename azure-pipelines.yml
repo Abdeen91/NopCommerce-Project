@@ -67,6 +67,7 @@ stages:
       - name: MyJob2
         value : stageDependencies.A1.MyJob2.result        
     jobs:
+    - job: MyJob4
     - job: MyJob3
       dependsOn: A1
       condition: eq(stageDependencies.A1.MyJob1.result, 'Failed') 
