@@ -28,7 +28,7 @@ stages:
                  Version: qcx
                  AppName: bar   
     variables:
-      ${{ if eq(variables['Version'], 'int1') }}:
+      ${{ if eq(Version, 'int1') }}:
           stageName: $(version) Test Teams is up                           
     steps:
       - task: PowerShell@2
