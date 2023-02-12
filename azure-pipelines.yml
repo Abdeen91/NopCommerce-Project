@@ -71,9 +71,9 @@ stages:
         - ${{ each value in variables.value }}:
            - script: echo ${{ value }}
            - ${{ if eq(value , 'Successded') }}:
-           - script: echo Abdeen succeeded
+             - script: echo Abdeen succeeded
            - ${{ else }}: 
-            - script: echo Abdeen failed   
+             - script: echo Abdeen failed   
 
  #       success{
  #          office365ConnectorSend (
