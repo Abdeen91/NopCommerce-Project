@@ -29,7 +29,8 @@ stages:
                  AppName: bar  
 
     variables:
-      Environment: $(Version)             
+      - name: Environment
+        value: $(Version)            
 
     steps:  
       - task: PowerShell@2
