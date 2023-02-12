@@ -59,15 +59,17 @@ stages:
 
   - stage: A2
     dependsOn: A1
+    variables:
     jobs:
     - job: MyJob2
+      condition: in(stageDependencies.A.A1.result, 'Succeeded') 
       steps:
-      - ${{ each value in parameters.environments }}:
-      - script: echo ${{ value }}
-      - ${{ if eq(stageDependencies.A1.value.result, 'Successded') }}:
+      #- ${{ each value in parameters.environments }}:
+      #- script: echo ${{ value }}
+      #- ${{ if eq(stageDependencies.A1.value.result, 'Successded') }}:
         - script: echo 'success'
-      - ${{ else }}: 
-        - script: echo "failed"   
+      #- ${{ else }}: 
+      #  - script: echo "failed"   
 
    
 
