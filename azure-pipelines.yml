@@ -17,7 +17,7 @@ stages:
   jobs :
   - job :  MyJob
     strategy :
-        maxParallel : 1
+        maxParallel : 2
         matrix:
              JOB1:
                  Version: 1.0
@@ -32,10 +32,10 @@ stages:
          echo "$(AppName)"
          echo job success
        displayName : "Echo Variables"
-       condition: succeeded()
+       condition: failed()
      - script: |
          echo job failed
-       condition: failed()
+       condition: succeeded()
 
       
 
