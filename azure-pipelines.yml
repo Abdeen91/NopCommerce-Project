@@ -62,7 +62,7 @@ stages:
     jobs:
     - job: MyJob2
       steps:
-      - ${{ each value in stageDependencies.A1.parameters.environment.result}}:
+      - ${{ each value in stageDependencies.A1.parameters.environment}}:
       - script: echo ${{ value }}
       - ${{ if eq(stageDependencies.A1.value.result, 'Successded') }}:
         - script: echo 'success'
