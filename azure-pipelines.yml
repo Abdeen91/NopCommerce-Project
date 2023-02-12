@@ -37,6 +37,13 @@ variables:
   - name: webhookURL
     value: Abdeen
 
+parameters:
+- name: listOfStrings
+  default: true
+  values:
+    - stageDependencies.A1.MyJob1.result
+    - stageDependencies.A1.MyJob2.result
+
 stages:
   - stage: A1
     jobs:
@@ -51,12 +58,7 @@ stages:
       - script: 
          echo  Hello world 2    
 
-parameters:
-- name: listOfStrings
-  type: object
-  default:
-  - stageDependencies.A1.MyJob1.result
-  - stageDependencies.A1.MyJob2.result
+
 
   - stage: A2
     variables:
