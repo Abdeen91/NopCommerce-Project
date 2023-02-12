@@ -65,11 +65,10 @@ stages:
       - name: MyJob1
         value : stageDependencies.A1.MyJob1.result
       - name: MyJob2
-        value : stageDependencies.A1.MyJob2.result        
+        value : stageDependencies.A1.MyJob2.result  
+    dependsOn: A1              
     jobs:
-    - job: MyJob4
     - job: MyJob3
-      dependsOn: A1
       condition: eq(stageDependencies.A1.MyJob1.result, 'Failed') 
       steps:
        # - task: PowerShell@2
