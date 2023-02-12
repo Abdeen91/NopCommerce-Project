@@ -79,6 +79,7 @@ stages:
        #       
        #        Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Test Teams!"}' -Uri $myTeamsWebHook
         - ${{ each value in parameters.listOfStrings }}:
+           - script: echo value
            - ${{ if eq(value , 'Succeeded') }}:
              - task: PowerShell@2
                inputs:
