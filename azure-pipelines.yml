@@ -20,10 +20,10 @@ stages:
         maxParallel : 2
         matrix:
              JOB1:
-                 Version: 1.0
+                 Version: int1
                  AppName: foo
              JOB2:
-                 Version: 2.0
+                 Version: qcx
                  AppName: bar   
                                
     steps:
