@@ -26,8 +26,8 @@ stages:
     condition: succeeded()              
     steps:
      - script: |
-         echo "($Version)"
-         echo "($AppName)"
+         echo "$(Version)"
+         echo "$(AppName)"
        displayName : "Echo Variables"
 
 #name: sampleWeb_$(Date:yyyyMMdd)$(Rev:.r)
