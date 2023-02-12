@@ -30,7 +30,7 @@ stages:
 
     variables:
       - name: Environment
-        value: "$(Version)"            
+        value: $(Version)            
 
     steps:  
       - task: PowerShell@2
