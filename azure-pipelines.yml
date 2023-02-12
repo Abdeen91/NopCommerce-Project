@@ -54,9 +54,9 @@ stages:
   - stage: A2
     variables:
       - name: MyJob1
-        value : ${{stageDependencies.A1.MyJob1.result}}
+        value : stageDependencies.A1.MyJob1.result
       - name: MyJob2
-        value : ${{stageDependencies.A1.MyJob2.result}}        
+        value : stageDependencies.A1.MyJob2.result        
     dependsOn: A1
     jobs:
     - job: MyJob2
