@@ -22,7 +22,7 @@ stages:
              JOB2:
                  Version: 2.0
                  AppName: bar   
-    condition: succeeded('JOB1')              
+    condition: succeeded('MyJob.JOB1')              
     steps:
      - script:
          echo "($Version)"
