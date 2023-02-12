@@ -35,7 +35,7 @@ stages:
       - task: PowerShell@2
         inputs: 
          targetType: 'inline'
-         ${{ if eq( Environment, 'int1' ) }}:   
+         ${{ if eq( variables.Environment, 'int1' ) }}:   
           script: |
             echo   $(Environment)
             echo  "$(Version)"
