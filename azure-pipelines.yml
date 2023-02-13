@@ -37,13 +37,13 @@ stages:
 
     steps: 
       
-      - bash: echo "##vso[task.setvariable variable="$(Version)";isOutput=true]$(Version) is up"
+      - bash: echo "##vso[task.setvariable variable=$(Version);isOutput=true]$(Version) is up"
         displayName: Set new variable value
         name: setEnv
         condition: Succeeded()
       
       - script: |
-          echo $(Version) # outputs secondValue
+          echo $(setEnv.$(Version)) # outputs secondValue
          
 
       # - task: PowerShell@2
