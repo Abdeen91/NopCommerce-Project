@@ -29,22 +29,20 @@ stages:
                  AppName: bar  
 
     variables:
-      - name: Environmentstatusint1
+      - name: Environmentstatus
         value: 1
-      - name: Environmentstatusqcx
-        value: 1  
 
 
 
     steps: 
       
-      - bash: echo "##vso[task.setvariable variable=Environmentstatus+$(Version)]$(Version) is up"
+      - bash: echo "##vso[task.setvariable variable=Environmentstatus]$(Version) is up"
         displayName: Set new variable value
         condition: Succeeded()
             
       - script: |
-         echo $(Environmentstatus+$(Version))
-         echo ${{variables.Environmentstatus+$(Version)}} # outputs secondValue
+         echo $(Environmentstatus)
+         echo ${{variables.Environmentstatus}} # outputs secondValue
          
 
       # - task: PowerShell@2
