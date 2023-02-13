@@ -45,7 +45,6 @@ stages:
         inputs: 
          targetType: 'inline'
          script: |
-            echo   ${{variables.int1}}
             echo   $(Environment)
             echo  "$(Version)"
             $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
@@ -66,7 +65,7 @@ stages:
       int1Msg : $[ dependencies.MyJob.outputs['int1status.int'] ]
     steps:
     - powershell: |
-        Write-Host $(int1Msg)
+        echo $(int1Msg)
                
           
     # - ${{ if eq('Version', 'int1') }}:
