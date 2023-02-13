@@ -46,6 +46,7 @@ stages:
         - bash: |
            echo $(Environmentstatus)
            echo "##vso[task.setvariable variable=int1status]$(Version) is up"
+          displayName: int1
       - ${{ elseif eq(variables.currentEnv, 'qcx') }}: 
          - bash: |
             echo $(Environmentstatus)
