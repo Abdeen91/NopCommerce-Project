@@ -42,7 +42,7 @@ stages:
         condition: Succeeded()
       
       - script: |
-         echo $($(Version)) # outputs secondValue
+         echo ${{Version}} # outputs secondValue
          
 
       # - task: PowerShell@2
