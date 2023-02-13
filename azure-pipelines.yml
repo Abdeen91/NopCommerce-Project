@@ -60,14 +60,14 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-      int1Msg : $[ dependencies.MyJob.outputs['passOutput.myOutputVar'] ]
+      int1Msg: $[ dependencies.MyJob.outputs['passOutput.myOutputVar'] ]
     steps:
     - bash: echo $(int1Msg)
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
         script: |
-          echo "$(int1Msg)"
+          echo $(int1Msg)
                
           
     # - ${{ if eq('Version', 'int1') }}:
