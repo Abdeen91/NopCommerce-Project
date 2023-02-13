@@ -63,11 +63,11 @@ stages:
       int1Msg : $[ dependencies.MyJob.outputs['passOutput.myOutputVar'] ]
     steps:
     - bash: echo $(int1Msg)
-    # - task: PowerShell@2
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       echo $(int1Msg)
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo "$(int1Msg)"
                
           
     # - ${{ if eq('Version', 'int1') }}:
