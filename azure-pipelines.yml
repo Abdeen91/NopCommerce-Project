@@ -37,7 +37,7 @@ stages:
 
     steps: 
       
-      - bash: echo "##vso[task.setvariable variable=int1]secondValue"
+      - bash: echo "##vso[task.setvariable variable="$(Version)"]$(Version)"
         displayName: Set new variable value
       
       - script: |
