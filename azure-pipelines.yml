@@ -31,8 +31,7 @@ stages:
     variables:
       - name: Environmentstatus
         value: 1
-      - name : currentEnv
-        value: ${{Version}} 
+
 
 
 
@@ -42,12 +41,12 @@ stages:
         displayName: Set new variable value
         condition: Succeeded()
 
-      - ${{ if eq(variables.currentEnv, 'int1') }}:     
+      - ${{ if eq(Environmentstatus, 'int1') }}:     
         - bash: |
            echo $(Environmentstatus)
            echo "##vso[task.setvariable variable=int1status]$(Version) is up"
           displayName: int1
-      - ${{ elseif eq(variables.currentEnv, 'qcx') }}: 
+      - ${{ elseif eq(Environmentstatus, 'qcx') }}: 
          - bash: |
             echo $(Environmentstatus)
             echo "##vso[task.setvariable variable=qcxstatus]$(Version) is up"
