@@ -61,7 +61,7 @@ stages:
         condition: Failed()
 
   - job: MyJob2 
-    condition: MyJob
+    dependsOn: MyJob
     variables:
       int1Msg : $[ dependencies.MyJob.outputs['int1status.int'] ]
     steps:
