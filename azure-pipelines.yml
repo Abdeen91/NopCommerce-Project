@@ -37,9 +37,9 @@ stages:
 
     steps: 
       
-      - powershell: 
-           Write-Host "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is a stage output variable"
-        name: int1
+      - bash: |
+           echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]this is from job A"
+        name: passOutput
 
       - task: PowerShell@2
         inputs: 
@@ -61,15 +61,15 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-      int1Msg : $[ dependencies.MyJob.outputs['int1.myOutputVar'] ]
+      int1Msg : $[ dependencies.MyJob.outputs['passOutput.myOutputVar'] ]
     steps:
-    - powershell: |
-        echo $(int1Msg)
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: |
-          echo $(int1Msg)
+    - bash: |
+       echo $(int1Msg)
+    # - task: PowerShell@2
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       echo $(int1Msg)
                
           
     # - ${{ if eq('Version', 'int1') }}:
