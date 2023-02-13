@@ -17,7 +17,7 @@ variables:
 stages:
 - stage : Mystage
   jobs :
-  - job :  MyJob
+  - job :  MyJob1
     strategy :
         maxParallel : 2
         matrix:
@@ -28,34 +28,30 @@ stages:
                  Version: qcx
                  AppName: bar  
 
-    variables:
-      - name: int1
-        value:
-      - name: qcx
-        value:  
+    # variables:
+    #   - name: int1
+    #     value:
+    #   - name: qcx
+    #     value:  
 
 
     steps: 
       
       - powershell: 
-           Write-Host "##vso[task.setvariable variable=$(Version);isOutput=true]this is a stage output variable"
+           Write-Host "##vso[task.setvariable variable=int;isOutput=true]this is a stage output variable"
+        name: int1status
 
       - task: PowerShell@2
         inputs: 
          targetType: 'inline'
-        # ${{ if eq( variables.Environment, 'int1' ) }}:   
          script: |
             echo   ${{variables.int1}}
             echo   $(Environment)
             echo  "$(Version)"
             $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
            # Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"$(version) Test Teams is up"}' -Uri $myTeamsWebHook 
-        condition: Succeeded()
-         
+        condition: Succeeded()   
 
-              
-         
-      
       - task: PowerShell@2
         inputs:
          targetType: 'inline'
@@ -64,7 +60,14 @@ stages:
          #   Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"$(version) Test Teams is down"}' -Uri $myTeamsWebHook 
         condition: Failed()
 
-        
+  - job: MyJob2 
+    condition: MyJob1
+    variables:
+      int1Msg : $[ dependencies.MyJob1.outputs['int1status.int'] ]
+    steps:
+    - powershell: |
+        Write-Host $(int1Msg)
+               
           
     # - ${{ if eq('Version', 'int1') }}:
    #  - ${{ if eq(variables['Version'], 'qcx') }}:
