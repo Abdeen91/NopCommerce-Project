@@ -37,12 +37,12 @@ stages:
 
     steps: 
       
-      - bash: echo "##vso[task.setvariable variable="$(Version)"]$(Version)"
+      - bash: echo "##vso[task.setvariable variable="$(Version)"]$(Version) is up"
         displayName: Set new variable value
+        condition: Succeeded()
       
       - script: |
-          echo ${{ variables.int1 }} # outputs initialValue
-          echo $(int1) # outputs secondValue
+          echo $(Version) # outputs secondValue
 
       - task: PowerShell@2
         inputs: 
