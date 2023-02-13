@@ -32,7 +32,7 @@ stages:
       - name: Environmentstatus
         value: 1
       - name : currentEnv
-        value: int1 
+        value: $[Version] 
 
 
 
