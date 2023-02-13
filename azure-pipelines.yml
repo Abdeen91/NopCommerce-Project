@@ -61,7 +61,7 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-      int1Msg : $[ dependencies.MyJob.outputs['int1status.int'] ]
+      int1Msg : $(int1status.int)
     steps:
     - powershell: |
         echo $(int1Msg)
