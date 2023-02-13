@@ -42,7 +42,6 @@ stages:
         condition: Succeeded()
       
       - script: |
-         echo ${{ variables.$(Version) }} # outputs initialValue
          echo $($(Version)) # outputs secondValue
          
 
