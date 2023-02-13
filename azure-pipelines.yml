@@ -44,7 +44,7 @@ stages:
             
       - script: |
          echo $(Environmentstatus+$(Version))
-         echo ${{variables.Environmentstatus$(Version)}} # outputs secondValue
+         echo ${{variables.Environmentstatus+$(Version)}} # outputs secondValue
          
 
       # - task: PowerShell@2
