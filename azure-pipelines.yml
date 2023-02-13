@@ -17,7 +17,7 @@ variables:
 stages:
 - stage : Mystage
   jobs :
-  - job :  MyJob1
+  - job :  MyJob
     strategy :
         maxParallel : 2
         matrix:
@@ -61,9 +61,9 @@ stages:
         condition: Failed()
 
   - job: MyJob2 
-    condition: MyJob1
+    condition: MyJob
     variables:
-      int1Msg : $[ dependencies.MyJob1.outputs['int1status.int'] ]
+      int1Msg : $[ dependencies.MyJob.outputs['int1status.int'] ]
     steps:
     - powershell: |
         Write-Host $(int1Msg)
