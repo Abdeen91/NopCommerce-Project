@@ -42,6 +42,9 @@ stages:
         name: setEnv
         condition: Succeeded()
       
+      - script: echo $(setEnv.int1)
+        name: echovar
+      
       - script: |
           echo $(Version) # outputs secondValue
 
