@@ -38,7 +38,7 @@ stages:
     steps: 
       
       - powershell: 
-             Write-Host "##vso[task.setvariable variable=$(Version)]this is the same job"
+           Write-Host "##vso[task.setvariable variable=$(Version);isOutput=true]this is a stage output variable"
 
       - task: PowerShell@2
         inputs: 
