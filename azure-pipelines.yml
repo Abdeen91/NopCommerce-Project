@@ -72,13 +72,13 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-      int1Msg: $[ dependencies.MyJob.outputs['setEnv.int1'] ]
+      $(Version): $[ dependencies.MyJob.outputs['setEnv."$(Version)"'] ]
     steps:
     - task: PowerShell@2
       inputs: 
          targetType: 'inline'
          script: |
-            echo $(int1Msg)        
+            echo $(int1)        
             # $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
             # Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"$(int1) `n$(qcx)"}' -Uri $myTeamsWebHook 
       condition: Succeeded()   
