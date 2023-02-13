@@ -28,17 +28,17 @@ stages:
                  Version: qcx
                  AppName: bar  
 
-    # variables:
-    #   - name: int1
-    #     value:
-    #   - name: qcx
-    #     value:  
+    variables:
+      - name: int1
+        value: 1
+      - name: qcx
+        value: 2 
 
 
     steps: 
       
-      - bash: echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]this is from job A"
-        name: passOutput
+      - bash: echo echo "##vso[task.setvariable variable=int1]secondValue"
+        displayName: Set new variable value
 
       - task: PowerShell@2
         inputs: 
@@ -62,12 +62,12 @@ stages:
     variables:
       int1Msg: $[ dependencies.MyJob.outputs['passOutput.myOutputVar'] ]
     steps:
-    - bash: echo $(int1Msg)
+    - bash: echo $(int1) 
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
         script: |
-          echo $(int1Msg)
+          echo $(int1)
                
           
     # - ${{ if eq('Version', 'int1') }}:
