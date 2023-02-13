@@ -59,8 +59,8 @@ stages:
 
   - job: MyJob2 
     dependsOn: MyJob
-    variables:
-      int1Msg: $[ dependencies.MyJob.outputs['passOutput.myOutputVar'] ]
+    # variables:
+    #   int1Msg: $[ dependencies.MyJob.outputs['passOutput.myOutputVar'] ]
     steps:
     - bash: echo $(int1) 
     - task: PowerShell@2
