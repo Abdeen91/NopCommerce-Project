@@ -37,16 +37,16 @@ stages:
 
     steps: 
       
-      - bash: echo "##vso[task.setvariable variable=Environmentstatus]$(Version) is up"
+      - bash: echo "##vso[task.setvariable variable=Environmentstatus]$(Version)"
         displayName: Set new variable value
         condition: Succeeded()
 
-      - ${{ if containsValue(Environmentstatus, 'int1') }}:     
+      - ${{ if eq(Environmentstatus, 'int1') }}:     
         - bash: |
            echo $(Environmentstatus)
            echo "##vso[task.setvariable variable=int1status]$(Version) is up"
           displayName: int1
-      - ${{ elseif containsValue(Environmentstatus, 'qcx') }}: 
+      - ${{ elseif eq(Environmentstatus, 'qcx') }}: 
          - bash: |
             echo $(Environmentstatus)
             echo "##vso[task.setvariable variable=qcxstatus]$(Version) is up"
