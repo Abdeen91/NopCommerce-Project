@@ -29,16 +29,18 @@ stages:
                  AppName: bar  
 
     variables:
-      - name: Environment
-        value: $(Version)
+      - name: int1
+        value:
+      - name: qcx
+        value:  
 
 
     steps: 
-      - ${{ if eq( variables.Environment, 'int1' ) }}:  
-         - powershell: 
-             Write-Host "##vso[task.setvariable variable=myJobVar]this is the same job"
+      
+      - powershell: 
+             Write-Host "##vso[task.setvariable variable=$(Version)]this is the same job"
 
-         - powershell: 
+      - powershell: 
               Write-Host $(myJobVar)
       - task: PowerShell@2
         inputs: 
