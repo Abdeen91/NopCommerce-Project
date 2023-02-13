@@ -43,7 +43,7 @@ stages:
         condition: Succeeded()
       
       - script: |
-          echo $(setEnv.$(Version)) # outputs secondValue
+          echo $(Version) # outputs secondValue
          
 
       # - task: PowerShell@2
