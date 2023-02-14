@@ -29,7 +29,7 @@ stages:
      
       - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the $(Version) value"
         name: setvarStep
-        condition: and(succeeded(), eq(variables['Version'], 'int1'))
+        # condition: and(succeeded(), eq(variables['Version'], 'int1'))
 
       - bash: echo $(setvarStep.myOutputVar)
               echo $(Agent.JobName)
@@ -59,7 +59,8 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-       myVarFromJobA: $[ dependencies.MyJob.JOB1.outputs['setvarStep.myOutputVar'] ]
+       myVarFromJobA: $[ dependencies.MyJob.outputs['setvarStep.myOutputVar'] ]
+       
     steps:
     - bash: |
           echo $(myVarFromJobA)
