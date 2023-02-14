@@ -11,9 +11,9 @@ pool:
 
 
 stages:
-- stage : Mystage
-  jobs :
-  - job :  MyJob
+- stage: Mystage
+  jobs:
+  - job: MyJob
     strategy :
         maxParallel : 2
         matrix:
@@ -59,7 +59,7 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-       myVarFromJobA: $[ dependencies.MyJob.outputs['setvarStep.myOutputVar'] ]
+       myVarFromJobA: $[ dependencies.MyJob.JOB1.outputs['setvarStep.myOutputVar'] ]
     steps:
     - bash: |
           echo $(myVarFromJobA)
