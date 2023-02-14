@@ -59,7 +59,7 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-       myVarFromJobA: $[ dependencies.MyJob.outputs['setvarStep.myOutputVar'] ]
+       myVarFromJobA: $[ dependencies.MyJob.JOB1.outputs['setvarStep.myOutputVar'] ]
        
     steps:
     - bash: |
