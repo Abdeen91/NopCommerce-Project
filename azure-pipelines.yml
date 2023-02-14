@@ -10,8 +10,8 @@ pool:
   name: Abdeen
 
 variables:
-- name: status
-  value: success
+      - name: Environmentstatus
+        value: $(Version)
 
 
 stages:
@@ -28,16 +28,14 @@ stages:
                  Version: qcx
                  AppName: bar  
 
-    variables:
-      - name: Environmentstatus
-        value: $(Version)
+
       
 
 
 
     steps: 
       
-      - ${{ if eq(variables['variables.Environmentstatus'], 'int1') }}:
+      - ${{ if eq(variables['Environmentstatus'], 'int1') }}:
            - powershell: |
                 Write-Host "##vso[task.setvariable variable=int1;isoutput=true]$(Version) is up"
              name: passOutput
