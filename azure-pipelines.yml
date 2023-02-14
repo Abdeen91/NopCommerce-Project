@@ -9,10 +9,6 @@
 pool:
   name: Abdeen
 
-variables:
-      - name: Environmentstatus
-        value: $(Version)
-
 
 stages:
 - stage : Mystage
@@ -29,19 +25,11 @@ stages:
                  AppName: bar  
 
 
-      
-
-
-
     steps: 
-      
-      - ${{ if eq(variables['Environmentstatus'], 'int1') }}:
-           - powershell: |
-                Write-Host "##vso[task.setvariable variable=int1;isoutput=true]$(Version) is up"
-             name: passOutput
-             condition: Succeeded()
-           - powershell: |
-                Write-Host $(int1)
+      - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the $(Version) value"
+        name: setvarStep
+      - bash: echo $(setvarStep.myOutputVar)
+        name: echovar
  
 
 
@@ -65,16 +53,11 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-      int1 : $[ dependencies.MyJob.outputs['passOutput.$(Version)'] ]
+       myVarFromJobADebug: $[ dependencies.MyJob.outputs['debugJob.setvarStep.myOutputVar'] ]
     steps:
-    - task: PowerShell@2
-      inputs: 
-         targetType: 'inline'
-         script: |
-            echo $(Version)        
-            # $myTeamsWebHook = “https://vodafone.webhook.office.com/webhookb2/57d56a25-1bd8-43de-a333-251ee152be67@68283f3b-8487-4c86-adb3-a5228f18b893/IncomingWebhook/40060548445f42488a707b744a5c5c3d/ae86f284-3d1d-442b-8cd6-28c89bd0544f”
-            # Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"$(int1) `n$(qcx)"}' -Uri $myTeamsWebHook 
-      condition: Succeeded()   
+      - script: echo $(myVarFromJobADebug)
+        name: echovar 
+      
 
                
           
