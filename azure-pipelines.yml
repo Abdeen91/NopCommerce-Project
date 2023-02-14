@@ -26,8 +26,9 @@ stages:
 
 
     steps: 
-      - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the $(Version) value"
-        name: setvarStep
+      - ${{ if eq(variables['System.JobName.Version'], 'main') }}:
+        - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the $(Version) value"
+          name: setvarStep
       - bash: echo $(setvarStep.myOutputVar)
               echo $(Agent.JobName)
               echo $(System.JobName)
