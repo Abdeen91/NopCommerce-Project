@@ -25,7 +25,9 @@ stages:
                  AppName: bar  
 
     variables: 
-      Name: $[ dependencies.MyJob.outputs['setvarStep.myOutputVar'] ]
+      - name: state
+        value: $[ dependencies.MyJob.JOB1.outputs['setvarStep.myOutputVar'] ]
+
 
     steps: 
      
@@ -68,7 +70,7 @@ stages:
     steps:
     - bash: |
           echo $(myVarFromJobA)
-          echo $(variables.Name)
+          echo $(variables.state)
       
 
                
