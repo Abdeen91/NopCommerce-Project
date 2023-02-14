@@ -70,7 +70,7 @@ stages:
     steps:
     - bash: |
           echo $(myVarFromJobA)
-          echo $(variables.state)
+          echo ${{variables.state}}
       
 
                
