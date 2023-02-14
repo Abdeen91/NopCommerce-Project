@@ -31,7 +31,7 @@ stages:
 
     steps: 
      
-      - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the $(Version) value"
+      - powershell: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the $(Version) value"
         name: setvarStep
         condition: and(succeeded(), eq(variables['Version'], 'int1'))
 
@@ -68,7 +68,7 @@ stages:
        myVarFromJobA: $[ dependencies.MyJob.JOB1.outputs['setvarStep.myOutputVar'] ]
        
     steps:
-    - bash: |
+    - script: |
           echo $(myVarFromJobA)
           echo ${{variables.state}}
       
