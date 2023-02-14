@@ -30,14 +30,14 @@ stages:
 
     variables:
       - name: Environmentstatus
-        value: 1
+        value: $(Version)
       
 
 
 
     steps: 
       
-      - ${{ if eq(Version, 'int1') }}:
+      - ${{ if eq(variables.Environmentstatus, 'int1') }}:
            - powershell: |
                 Write-Host "##vso[task.setvariable variable=int1;isoutput=true]$(Version) is up"
              name: passOutput
