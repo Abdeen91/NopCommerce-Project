@@ -31,26 +31,21 @@ stages:
     variables:
       - name: Environmentstatus
         value: 1
-
+      
 
 
 
     steps: 
       
-      - bash: echo "##vso[task.setvariable variable=Environmentstatus;isOutput=true]$(Version)"
-        name: Envstate
-        displayName: Set new variable value
-        condition: Succeeded()
+      - ${{ if eq(Version, 'int1') }}:
+           - powershell: |
+                Write-Host "##vso[task.setvariable variable=int1;isoutput=true]$(Version) is up"
+             name: passOutput
+             condition: Succeeded()
 
-      - ${{ if eq(Envstate.Environmentstatus, 'int1') }}:     
-        - bash: |
-           echo $(Environmentstatus)
-           echo "##vso[task.setvariable variable=int1status]$(Version) is up"
-          displayName: int1
-      - ${{ elseif eq(Envstate.Environmentstatus, 'qcx') }}: 
-         - bash: |
-            echo $(Environmentstatus)
-            echo "##vso[task.setvariable variable=qcxstatus]$(Version) is up"
+      - bash: |
+            echo $(passOutput.int1)
+
       # - task: PowerShell@2
       #   inputs: 
       #    targetType: 'inline'
