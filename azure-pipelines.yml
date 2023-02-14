@@ -42,9 +42,10 @@ stages:
                 Write-Host "##vso[task.setvariable variable=int1;isoutput=true]$(Version) is up"
              name: passOutput
              condition: Succeeded()
+           - powershell: |
+                Write-Host $(int1)
+ 
 
-      - bash: |
-            echo $(passOutput.int1)
 
       # - task: PowerShell@2
       #   inputs: 
@@ -66,7 +67,7 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-      $(Version): $[ dependencies.MyJob.outputs['setEnv.$(Version)'] ]
+      int1 : $[ dependencies.MyJob.outputs['passOutput.$(Version)'] ]
     steps:
     - task: PowerShell@2
       inputs: 
