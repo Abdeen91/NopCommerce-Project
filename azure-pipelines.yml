@@ -25,18 +25,33 @@ stages:
                  AppName: bar  
 
     variables: 
-      - name: state
+      - name: int1
         value: $(setvarStep.myOutputVar)
+      - name: qcx
+        value: $(setvarStep.qcx)
 
 
     steps: 
      
       - powershell: |
-           echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the value"
+           echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(Version) is up)"
         name: setvarStep
         condition: and(succeeded(), eq(variables['Version'], 'int1'))
+      - powershell: |
+           echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(Version) is down)"
+        name: setvarStep
+        condition: and(Failed(), eq(variables['Version'], 'int1'))
+      - powershell: |
+           echo "##vso[task.setvariable variable=qcx;isOutput=true]$(Version) is up)"
+        name: setvarStep
+        condition: and(succeeded(), eq(variables['Version'], 'qcx'))
+      - powershell: |
+           echo "##vso[task.setvariable variable=qcx;isOutput=true]$(Version) is down)"
+        name: setvarStep
+        condition: and(Failed(), eq(variables['Version'], 'qcx'))
 
-      - bash: echo ${{variables.state}}
+      - bash: echo ${{variables.int1}}
+              echo ${{variables.qcx}}
               echo $(Agent.JobName)
               echo $(System.JobName)
         name: echovar
