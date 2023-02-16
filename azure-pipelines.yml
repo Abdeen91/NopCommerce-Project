@@ -33,7 +33,7 @@ stages:
      
       - powershell: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the value"
         name: setvarStep
-        condition: and(succeeded(), eq(variables['Version'], 'int1'))
+        # condition: and(succeeded(), eq(variables['Version'], 'int1'))
 
       - bash: echo $(setvarStep.myOutputVar)
               echo $(Agent.JobName)
