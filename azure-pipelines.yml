@@ -37,6 +37,7 @@ stages:
         condition: and(succeeded(), eq(variables['Version'], 'int1'))
 
       - bash: echo ${{variables.state}}
+              echo $['variables.state']
               echo $(Agent.JobName)
               echo $(System.JobName)
         name: echovar
