@@ -33,7 +33,7 @@ stages:
 
     steps: 
      - ${{ if eq(variables['Version'], 'int1') }}:
-      - powershell: |
+       - powershell: |
            echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(Version) is up)"
       #   condition: and(succeeded(), eq(variables['Version'], 'int1'))
       # - powershell: |
@@ -41,10 +41,10 @@ stages:
       #   condition: and(Failed(), eq(variables['Version'], 'int1'))
 
 
-      - bash: echo ${{variables.int1}}
+     - bash: echo ${{variables.int1}}
               echo $(Agent.JobName)
               echo $(System.JobName)
-        name: echovar
+       name: echovar
         
 
       
