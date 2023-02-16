@@ -27,27 +27,21 @@ stages:
     variables: 
       - name: int1
         value: $(myOutputVar)
-      - name: qcx
-        value: $(qcx)
+      # - name: qcx
+      #   value: $(qcx)
 
 
     steps: 
-     
+     - ${{ if eq(variables['Version'], 'int1') }}:
       - powershell: |
            echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(Version) is up)"
-        condition: and(succeeded(), eq(variables['Version'], 'int1'))
-      - powershell: |
-           echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(Version) is down)"
-        condition: and(Failed(), eq(variables['Version'], 'int1'))
-      - powershell: |
-           echo "##vso[task.setvariable variable=qcx;isOutput=true]$(Version) is up)"
-        condition: and(succeeded(), eq(variables['Version'], 'qcx'))
-      - powershell: |
-           echo "##vso[task.setvariable variable=qcx;isOutput=true]$(Version) is down)"
-        condition: and(Failed(), eq(variables['Version'], 'qcx'))
+      #   condition: and(succeeded(), eq(variables['Version'], 'int1'))
+      # - powershell: |
+      #      echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(Version) is down)"
+      #   condition: and(Failed(), eq(variables['Version'], 'int1'))
+
 
       - bash: echo ${{variables.int1}}
-              echo ${{variables.qcx}}
               echo $(Agent.JobName)
               echo $(System.JobName)
         name: echovar
