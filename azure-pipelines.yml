@@ -26,28 +26,24 @@ stages:
 
     variables: 
       - name: int1
-        value: $(setvarStep.myOutputVar)
+        value: $(myOutputVar)
       - name: qcx
-        value: $(setvarStep.qcx)
+        value: $(qcx)
 
 
     steps: 
      
       - powershell: |
            echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(Version) is up)"
-        name: int1state
         condition: and(succeeded(), eq(variables['Version'], 'int1'))
       - powershell: |
            echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(Version) is down)"
-        name: int1state
         condition: and(Failed(), eq(variables['Version'], 'int1'))
       - powershell: |
            echo "##vso[task.setvariable variable=qcx;isOutput=true]$(Version) is up)"
-        name: setvarStep
         condition: and(succeeded(), eq(variables['Version'], 'qcx'))
       - powershell: |
            echo "##vso[task.setvariable variable=qcx;isOutput=true]$(Version) is down)"
-        name: setvarStep
         condition: and(Failed(), eq(variables['Version'], 'qcx'))
 
       - bash: echo ${{variables.int1}}
