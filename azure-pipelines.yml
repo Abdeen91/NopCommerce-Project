@@ -24,9 +24,9 @@ stages:
                  Version: qcx
                  AppName: bar  
 
-    # variables: 
-    #   - name: state
-    #     value: $(setvarStep.myOutputVar)
+    variables: 
+      - name: state
+        value: $(setvarStep.myOutputVar)
 
 
     steps: 
