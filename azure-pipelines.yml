@@ -24,14 +24,14 @@ stages:
                  Version: qcx
                  AppName: bar  
 
-    variables: 
-      - name: state
-        value: $[ dependencies.MyJob.JOB1.outputs['setvarStep.myOutputVar'] ]
+    # variables: 
+    #   - name: state
+    #     value: $[ dependencies.MyJob.JOB1.outputs['setvarStep.myOutputVar'] ]
 
 
     steps: 
      
-      - powershell: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the $(Version) value"
+      - powershell: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the value"
         name: setvarStep
         condition: and(succeeded(), eq(variables['Version'], 'int1'))
 
@@ -65,7 +65,7 @@ stages:
   - job: MyJob2 
     dependsOn: MyJob
     variables:
-       myVarFromJobA: $[ dependencies.MyJob.JOB1.outputs['setvarStep.myOutputVar'] ]
+       myVarFromJobA: $[ dependencies.MyJob.outputs['setvarStep.myOutputVar'] ]
        
     steps:
     - script: |
